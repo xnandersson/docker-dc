@@ -10,3 +10,7 @@ Howto:
  * Build the image: (sudo docker -t xnandersson/dc:utopic .)
  * Run it: (sudo docker run -d -P --hostname=dc --name=dc xnandersson/dc:utopic)
 
+Quirks:
+ * The script dc.sh is a hack. Perhaps even ugly. The hack is needed because
+   each time you start a new container it will get an arbitrary ip address,
+   so dc.sh updates Samba's dns to reflect this new reality.
