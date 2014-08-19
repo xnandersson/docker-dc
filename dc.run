@@ -1,0 +1,1 @@
+sudo docker run -d -P --hostname=dc --name=dc xnandersson/dc:utopic
