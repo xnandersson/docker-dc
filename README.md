@@ -7,7 +7,7 @@ Prerequisites:
 Howto:
 
  * Modify the contents of dcpromo.debconf to reflect your domain.
- * Build the image: (sudo docker -t xnandersson/dc:utopic .)
+ * Build the image: (sudo docker build -t 'xnandersson/dc:utopic' .)
  * Run it: (sudo docker run -d -P --hostname=dc --name=dc xnandersson/dc:utopic)
 
 Quirks:
