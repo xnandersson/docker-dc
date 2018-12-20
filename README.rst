@@ -2,7 +2,7 @@
 Active Directory
 ================
 
-Docker-dc is an implementation of Samba4 Active Domain Controller in Docker.
+Samba4 Active Directory Domain Controller.
 
 Prerequisites
 -------------
