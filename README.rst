@@ -50,23 +50,23 @@ Python HOWTO
 
 .. code:: python3
 
-  import ldap
+  >>> import ldap
 
-  con = ldap.initialize('ldaps://127.0.0.1')
-  con.set_option(ldap.OPT_X_SASL_NOCANON, 1)
-  con.set_option(ldap.OPT_REFERRALS, 0)
-  con.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_ALLOW)
-  con.protocol_version = ldap.VERSION3
-  con.simple_bind_s('Administrator@OPENFORCE.ORG', 'Abc123!')
+  >>> con = ldap.initialize('ldaps://127.0.0.1')
+  >>> con.set_option(ldap.OPT_X_SASL_NOCANON, 1)
+  >>> con.set_option(ldap.OPT_REFERRALS, 0)
+  >>> con.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_ALLOW)
+  >>> con.protocol_version = ldap.VERSION3
+  >>> con.simple_bind_s('Administrator@OPENFORCE.ORG', 'Abc123!')
 
-  entries = con.search_s(
-      base="dc=openforce,dc=org", 
-      scope=ldap.SCOPE_SUBTREE, 
-      filterstr='(objectClass=User)', 
-      attrlist=('cn','displayName'))
+  >>> entries = con.search_s(
+        base="dc=openforce,dc=org", 
+        scope=ldap.SCOPE_SUBTREE, 
+        filterstr='(objectClass=User)', 
+        attrlist=('cn','displayName'))
 
-  for entry in entries:
-      print(entry)
+  >>> for entry in entries:
+        print(entry)
 
 
 Samba-tool
@@ -74,25 +74,25 @@ Samba-tool
 
 .. code:: bash
 
-  sudo samba-tool user list
-  sudo samba-tool user setpassword Administrator
-  samba-tool user setpassword nandersson
-  sudo samba-tool dns query 192.168.1.10 1.168.192.in-addr.arpa 1.168.192.in-addr.arpa ALL -U Administrator --password='Abc123!'
+  $ sudo samba-tool user list
+  $ sudo samba-tool user setpassword Administrator
+  $ sudo samba-tool user setpassword nandersson
+  $ sudo samba-tool dns query 192.168.1.10 1.168.192.in-addr.arpa 1.168.192.in-addr.arpa ALL -U Administrator --password='Abc123!'
 
 DNS  
 ---
 
 .. code:: bash
 
-  samba-tool dns zonelist 192.168.1.10
-  samba-tool dns zonelist 192.168.1.10  -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns zonecreate 192.168.1.10 1.168.192.in-addr.arpa
-  samba-tool dns zonecreate 192.168.1.10 1.168.192.in-addr.arpa -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 10 PTR dc.openforce.org -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 openforce.org kubernetes A 192.168.1.12 -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 12 PTR kubernetes.openforce.org -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 openforce.org freeswitch A 192.168.1.14 -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 14 PTR freeswitch.openforce.org -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 15 PTR docker.openforce.org -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 openforce.org docker A 192.168.1.15 -U Administrator --password='Yb92!!Ha99'
-  samba-tool dns add 192.168.1.10 openforce.org k8s CNAME kubernetes.openforce.org -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns zonelist 192.168.1.10
+  $ samba-tool dns zonelist 192.168.1.10  -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns zonecreate 192.168.1.10 1.168.192.in-addr.arpa
+  $ samba-tool dns zonecreate 192.168.1.10 1.168.192.in-addr.arpa -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 10 PTR dc.openforce.org -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 openforce.org kubernetes A 192.168.1.12 -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 12 PTR kubernetes.openforce.org -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 openforce.org freeswitch A 192.168.1.14 -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 14 PTR freeswitch.openforce.org -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 15 PTR docker.openforce.org -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 openforce.org docker A 192.168.1.15 -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns add 192.168.1.10 openforce.org k8s CNAME kubernetes.openforce.org -U Administrator --password='Yb92!!Ha99'
