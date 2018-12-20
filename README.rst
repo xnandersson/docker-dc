@@ -1,8 +1,35 @@
-================
-Active Directory
-================
+=========================================
+Samba4 Active Directory Domain Controller
+=========================================
 
-Samba4 Active Directory Domain Controller.
+Abstract
+--------
+
+Creates a Docker Image, preloaded with Samba4 and a dcpromo-script
+that promotes the container on startup using the supplied variables.
+
+Example
+---------------
+
+Start container, promote domain controller and expose all ports locally
+
+.. code:: bash
+
+  $ docker run \
+      --privileged \
+      --name dc \
+      --rm \
+      -ti \
+      -e SAMBA_DOMAIN=openforce \
+      -e SAMBA_HOST_NAME=dc \
+      -e SAMBA_ADMINPASS=Abc123! \
+      -e SAMBA_KRBTGTPASS=Abc123! \
+      -e SAMBA_REALM=OPENFORCE.ORG \
+      -p 22:2222 -p 5353:53 -p 88:88 \
+      -p 135:135 -p 139:139 -p 389:389 \
+      -p 445:445 -p 464:464 -p 636:636 \
+      -p 1024:1024 -p 3268:3268 -p 3269:3269 \
+      xnandersson/samba-ad-dc dcpromo
 
 Prerequisites
 -------------
@@ -24,14 +51,6 @@ Install
   $ python src/docker-dc.py
   $ pytest
 
-Start Container
----------------
-
-Start container and expose all ports locally
-
-.. code:: bash
-
-  $ docker run --privileged --name dc --rm -ti -e SAMBA_DOMAIN=openforce -e SAMBA_HOST_NAME=dc -e SAMBA_ADMINPASS=Abc123! -e SAMBA_KRBTGTPASS=Abc123! -e SAMBA_REALM=OPENFORCE.ORG -p 22:2222 -p 5353:53 -p 88:88 -p 135:135 -p 139:139 -p 389:389 -p 445:445 -p 464:464 -p 636:636 -p 1024:1024 -p 3268:3268 -p 3269:3269 xnandersson/samba-ad-dc dcpromo
 
 Testing
 -------
