@@ -13,8 +13,8 @@ Prerequisites
   $ sudo usermod -a -G docker nandersson
   $ docker pull ubuntu:latest
 
-Howto
------
+Install
+-------
 
 .. code:: bash
 
@@ -23,3 +23,14 @@ Howto
   $ pip install -r requirements.txt
   $ python src/docker-dc.py
   $ pytest
+
+Python HOWTO
+------------
+
+.. code:: python3
+
+  import ldap
+
+  def test_active_directory(active_directory):
+    con = ldap.initialize('http://127.0.0.1')
+    assert con != None
