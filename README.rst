@@ -36,7 +36,7 @@ Prerequisites
 
 .. code:: bash
 
-  $ sudo apt-get install docker
+  $ sudo apt-get install docker devscripts python3-dev libldap2-dev libsasl2-dev
   $ sudo usermod -a -G docker nandersson
   $ docker pull ubuntu:latest
 
