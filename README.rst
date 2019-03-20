@@ -8,6 +8,16 @@ Abstract
 Creates a Docker Image, preloaded with Samba4 and a dcpromo-script
 that promotes the container on startup using the supplied variables.
 
+Prerequisites
+-------------
+
+.. code:: bash
+
+  $ sudo apt-get install docker.io devscripts python3-dev libldap2-dev libsasl2-dev python3-venv
+  $ sudo usermod -a -G docker nandersson
+  $ docker pull ubuntu:latest
+  
+  
 Example
 ---------------
 
@@ -31,14 +41,6 @@ Start container, promote domain controller and expose all ports locally
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
       xnandersson/samba-ad-dc dcpromo
 
-Prerequisites
--------------
-
-.. code:: bash
-
-  $ sudo apt-get install docker.io devscripts python3-dev libldap2-dev libsasl2-dev python3-venv
-  $ sudo usermod -a -G docker nandersson
-  $ docker pull ubuntu:latest
 
 Install
 -------
@@ -49,6 +51,7 @@ Install
   $ source .venv/bin/activate
   $ pip install -r requirements.txt
   $ python src/docker-dc.py
+  $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
   $ pytest
 
 
