@@ -14,6 +14,7 @@ def mkdir_build_dir():
 def create_dcpromo_debconf():
   with open(os.path.join(BUILD_DIR, 'dcpromo'), 'w') as f:
     f.write("""#!/bin/bash
+if [ ! -f /etc/krb5.conf ]; then
 samba-tool domain provision \
   --domain=${SAMBA_DOMAIN} \
   --host-name=${SAMBA_HOST_NAME} \
@@ -21,8 +22,9 @@ samba-tool domain provision \
   --krbtgtpass=${SAMBA_KRBTGTPASS} \
   --realm=${SAMBA_REALM}
 cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
-service samba-ad-dc start
 samba-tool user create nandersson Secret012
+fi
+service samba-ad-dc start
 /usr/sbin/sshd -D\n""")
 
 def create_dcpromo_template():

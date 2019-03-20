@@ -28,8 +28,14 @@ def active_directory(tmpdir):
 	'3269': 3269
   }
   client = docker.from_env()
-  container = client.containers.run('xnandersson/samba-ad-dc', command='dcpromo', privileged=True, ports=ports, name='dc', environment=environment, detach=True)
-  time.sleep(10)
+  dc = None
+  if not client.containers.list(all, filters={'name': 'dc'}):
+    dc = client.containers.run('xnandersson/samba-ad-dc', command='dcpromo', privileged=True, ports=ports, name='dc', environment=environment, detach=True)
+    time.sleep(10)
+  else:
+    dc = client.containers.get('dc')
+    dc.start()
+    time.sleep(1)
   yield
-  container.kill()
-  container.remove()
+  dc.kill()
+#  container.remove()
