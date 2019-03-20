@@ -17,6 +17,20 @@ Prerequisites
   $ sudo usermod -a -G docker nandersson
   $ docker pull ubuntu:latest
   
+
+Install
+-------
+
+.. code:: bash
+
+  $ python3 -m venv ~/venv3/docker-dc
+  $ source ~/venv3/docker-dc/bin/activate
+  $ pip install -U pip
+  $ pip install -r requirements.txt
+  $ python src/docker-dc.py
+  $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
+  $ pytest
+  
   
 Example
 ---------------
@@ -40,19 +54,6 @@ Start container, promote domain controller and expose all ports locally
       -p 445:445 -p 464:464 -p 636:636 \
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
       xnandersson/samba-ad-dc dcpromo
-
-
-Install
--------
-
-.. code:: bash
-
-  $ python3 -m venv .venv
-  $ source .venv/bin/activate
-  $ pip install -r requirements.txt
-  $ python src/docker-dc.py
-  $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
-  $ pytest
 
 
 Testing
