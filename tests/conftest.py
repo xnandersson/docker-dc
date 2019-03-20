@@ -35,7 +35,7 @@ def active_directory(tmpdir):
   else:
     dc = client.containers.get('dc')
     dc.start()
-    time.sleep(1)
+    time.sleep(2)
   yield
   dc.kill()
-#  container.remove()
+#  dc.remove()
