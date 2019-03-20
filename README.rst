@@ -25,7 +25,7 @@ Start container, promote domain controller and expose all ports locally
       -e SAMBA_ADMINPASS=Abc123! \
       -e SAMBA_KRBTGTPASS=Abc123! \
       -e SAMBA_REALM=OPENFORCE.ORG \
-      -p 22:2222 -p 5353:53 -p 88:88 \
+      -p 2222:22 -p 5353:53 -p 88:88 \
       -p 135:135 -p 139:139 -p 389:389 \
       -p 445:445 -p 464:464 -p 636:636 \
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
