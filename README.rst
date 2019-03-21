@@ -8,6 +8,27 @@ Abstract
 Creates a Docker Image, preloaded with Samba4 and a dcpromo-script
 that promotes the container on startup using the supplied variables.
 
+Start container, promote domain controller and expose all ports locally
+
+.. code:: bash
+
+  $ docker run \
+      --privileged \
+      --name dc \
+      --rm \
+      -ti \
+      -e SAMBA_DOMAIN=openforce \
+      -e SAMBA_HOST_NAME=dc \
+      -e SAMBA_ADMINPASS=Abc123! \
+      -e SAMBA_KRBTGTPASS=Abc123! \
+      -e SAMBA_REALM=OPENFORCE.ORG \
+      -p 2222:22 -p 5353:53 -p 88:88 \
+      -p 135:135 -p 139:139 -p 389:389 \
+      -p 445:445 -p 464:464 -p 636:636 \
+      -p 1024:1024 -p 3268:3268 -p 3269:3269 \
+      xnandersson/samba-ad-dc /usr/local/bin/dcpromo
+
+
 Prerequisites
 -------------
 
@@ -66,30 +87,6 @@ Testing
   $ ldapsearch  -H ldap://localhost:3268 -b 'cn=users,dc=openforce,dc=org' -x -D "Administrator@OPENFORCE.ORG" -s sub -Z "(cn=*)" cn mail sn -w 'Abc123!'
   $ ldapsearch  -H ldaps://localhost:3269 -b 'dc=openforce,dc=org' -x -w 'Abc123!'  -D "OPENFORCE\Administrator" -s sub  '(sAMAccountName=nandersson)'
   $ ldapsearch  -H ldap://localhost:389 -b 'cn=users,dc=openforce,dc=org' -x -D "Administrator@OPENFORCE.ORG" -s sub -Z "(cn=*)" cn mail sn -w 'Abc123!'
-
-
-Example
----------------
-
-Start container, promote domain controller and expose all ports locally
-
-.. code:: bash
-
-  $ docker run \
-      --privileged \
-      --name dc \
-      --rm \
-      -ti \
-      -e SAMBA_DOMAIN=openforce \
-      -e SAMBA_HOST_NAME=dc \
-      -e SAMBA_ADMINPASS=Abc123! \
-      -e SAMBA_KRBTGTPASS=Abc123! \
-      -e SAMBA_REALM=OPENFORCE.ORG \
-      -p 2222:22 -p 5353:53 -p 88:88 \
-      -p 135:135 -p 139:139 -p 389:389 \
-      -p 445:445 -p 464:464 -p 636:636 \
-      -p 1024:1024 -p 3268:3268 -p 3269:3269 \
-      xnandersson/samba-ad-dc /usr/local/bin/dcpromo
 
 
 Samba-tool
