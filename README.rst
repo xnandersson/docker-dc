@@ -34,8 +34,9 @@ Prerequisites
 
 .. code:: bash
 
-  $ sudo apt-get install docker.io devscripts python3-dev libldap2-dev libsasl2-dev python3-venv ldap-utils
+  $ sudo apt-get install docker.io devscripts python3-dev libldap2-dev libsasl2-dev python3-venv ldap-utils -y
   $ sudo usermod -a -G docker nandersson
+  $ su - $USER
   $ docker pull ubuntu:latest
   
 
