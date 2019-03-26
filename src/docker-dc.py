@@ -2,6 +2,7 @@
 import docker
 import os
 import shutil
+import subprocess
 import uuid
 
 BUILD_DIR = '/tmp/{uuid}/'.format(uuid=uuid.uuid4().hex)
@@ -13,9 +14,9 @@ def mkdir_build_dir():
     pass
 
 def copy_files_to_build_dir():
-    shutil.copyfile('Dockerfile', os.path.join(BUILD_DIR, 'Dockerfile')
-    shutil.copyfile('dcpromo.py', os.path.join(BUILD_DIR, 'dcpromo.py')
-    proc = subprocess.Popen(['chmod', '+x', os.path.join(BUILD_DIR, 'dcpromo.py'])
+    shutil.copyfile('Dockerfile', os.path.join(BUILD_DIR, 'Dockerfile'))
+    shutil.copyfile('dcpromo.py', os.path.join(BUILD_DIR, 'dcpromo.py'))
+    proc = subprocess.Popen(['chmod', '+x', os.path.join(BUILD_DIR, 'dcpromo.py')])
     proc.wait()
 
 if __name__ == '__main__':

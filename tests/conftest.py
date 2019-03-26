@@ -30,7 +30,7 @@ def active_directory(tmpdir):
   client = docker.from_env()
   dc = None
   if not client.containers.list(all, filters={'name': 'dc'}):
-    dc = client.containers.run('xnandersson/samba-ad-dc', command='dcpromo', privileged=True, ports=ports, name='dc', environment=environment, detach=True)
+    dc = client.containers.run('xnandersson/samba-ad-dc', command='dcpromo.py', privileged=True, ports=ports, name='dc', environment=environment, detach=True)
     time.sleep(10)
   else:
     dc = client.containers.get('dc')
