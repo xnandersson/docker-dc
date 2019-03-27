@@ -95,10 +95,14 @@ Samba-tool
 
 .. code:: bash
 
-  $ sudo samba-tool user list
-  $ sudo samba-tool user setpassword Administrator
-  $ sudo samba-tool user setpassword nandersson
-  $ sudo samba-tool dns query 192.168.1.10 1.168.192.in-addr.arpa 1.168.192.in-addr.arpa ALL -U Administrator --password='Abc123!'
+  # samba-tool user list
+  # samba-tool user setpassword Administrator
+  # samba-tool user setpassword nandersson
+  # samba-tool group add Staff
+  # samba-tool group add Superuser
+  # samba-tool group addmembers Staff nandersson
+  # samba-tool group addmembers Superuser nandersson
+  # samba-tool dns query 192.168.1.10 1.168.192.in-addr.arpa 1.168.192.in-addr.arpa ALL -U Administrator --password='Abc123!'
 
 DNS  
 ---
