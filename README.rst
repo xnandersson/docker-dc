@@ -101,7 +101,7 @@ Samba-tool
   # samba-tool group add Staff
   # samba-tool group add Superusers
   # samba-tool group addmembers Staff nandersson
-  # samba-tool group addmembers Superuser nandersson
+  # samba-tool group addmembers Superusers nandersson
   # samba-tool dns query 192.168.1.10 1.168.192.in-addr.arpa 1.168.192.in-addr.arpa ALL -U Administrator --password='Abc123!'
 
 DNS  
