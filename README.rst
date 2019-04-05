@@ -5,10 +5,9 @@ Samba4 Active Directory Domain Controller
 Abstract
 --------
 
-Creates a Docker Image, preloaded with Samba4 and a dcpromo-script
+Docker Image, preloaded with Samba4 and a dcpromo-script
 that promotes the container on startup using the supplied variables.
 
-Start container, promote domain controller and expose all ports locally
 
 Build
 -----
@@ -16,6 +15,7 @@ Build
 .. code:: bash
   
   $ sudo docker build -t xnandersson/samba-ad-dc .
+
 
 Run
 ---
@@ -38,6 +38,7 @@ Run
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
       xnandersson/samba-ad-dc /usr/local/bin/dcpromo.py
 
+
 Administer
 ----------
 
@@ -52,6 +53,7 @@ Administer
   # samba-tool group add Superusers
   # samba-tool group addmembers Staff nandersson
   # samba-tool group addmembers Superusers nandersson
+
 
 Package Dependencies
 --------------------
