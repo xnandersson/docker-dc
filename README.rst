@@ -28,6 +28,12 @@ Start container, promote domain controller and expose all ports locally
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
       xnandersson/samba-ad-dc /usr/local/bin/dcpromo.py
 
+Build
+-----
+
+.. code:: bash
+  
+  $ sudo docker build -t xnandersson/dc .
 
 Prerequisites
 -------------
@@ -35,13 +41,13 @@ Prerequisites
 .. code:: bash
 
   $ sudo apt-get install docker.io devscripts python3-dev libldap2-dev libsasl2-dev python3-venv ldap-utils -y
-  $ sudo usermod -a -G docker nandersson
-  $ su - $USER
-  $ docker pull ubuntu:latest
+  $ sudo docker pull ubuntu:latest
+  $ sudo usermod -a -G docker ${USER} 
+  $ su - ${USER}
   
 
-Install
--------
+Test
+----
 
 .. code:: bash
 
@@ -49,7 +55,6 @@ Install
   $ source ~/venv3/docker-dc/bin/activate
   $ pip install -U pip
   $ pip install -r requirements.txt
-  $ python src/docker-dc.py
   $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
   $ pytest
   
