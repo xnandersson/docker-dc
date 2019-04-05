@@ -44,7 +44,7 @@ Administer
 
 .. code:: bash
 
-  $ sudo docker exec dc /bin/bash
+  $ sudo docker exec -ti dc /bin/bash
   # samba-tool user create nandersson Secret012
   # samba-tool user setpassword Administrator
   # samba-tool user setpassword nandersson
