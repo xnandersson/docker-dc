@@ -19,8 +19,6 @@ def promote(samba_domain=None, samba_host_name=None, samba_adminpass=None, samba
     proc.wait()
     proc = subprocess.Popen(['cp', '/var/lib/samba/private/krb5.conf', '/etc/krb5.conf'])
     proc.wait()
-    proc = subprocess.Popen(['samba-tool', 'user', 'create', 'nandersson', 'Secret012'])
-    proc.wait()
 
 def service_start(service):
     proc = subprocess.Popen(['service', service, 'start'])

@@ -12,11 +12,11 @@ Start container, promote domain controller and expose all ports locally
 
 .. code:: bash
 
-  $ docker run \
+  $ sudo docker run \
       --privileged \
       --name dc \
       --rm \
-      -ti \
+      -d \
       -e SAMBA_DOMAIN=openforce \
       -e SAMBA_HOST_NAME=dc \
       -e SAMBA_ADMINPASS=Abc123! \
@@ -26,7 +26,7 @@ Start container, promote domain controller and expose all ports locally
       -p 135:135 -p 139:139 -p 389:389 \
       -p 445:445 -p 464:464 -p 636:636 \
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
-      xnandersson/samba-ad-dc /usr/local/bin/dcpromo
+      xnandersson/samba-ad-dc /usr/local/bin/dcpromo.py
 
 
 Prerequisites
@@ -95,7 +95,9 @@ Samba-tool
 
 .. code:: bash
 
+  $ sudo docker exec dc /bin/bash
   # samba-tool user list
+  # samba-tool user create nandersson Secret012
   # samba-tool user setpassword Administrator
   # samba-tool user setpassword nandersson
   # samba-tool group add Staff
