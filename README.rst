@@ -33,7 +33,7 @@ Build
 
 .. code:: bash
   
-  $ sudo docker build -t xnandersson/dc .
+  $ sudo docker build -t xnandersson/samba-ad-dc .
 
 Prerequisites
 -------------
