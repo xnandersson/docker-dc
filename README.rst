@@ -10,6 +10,16 @@ that promotes the container on startup using the supplied variables.
 
 Start container, promote domain controller and expose all ports locally
 
+Build
+-----
+
+.. code:: bash
+  
+  $ sudo docker build -t xnandersson/samba-ad-dc .
+
+Run
+---
+
 .. code:: bash
 
   $ sudo docker run \
@@ -28,15 +38,23 @@ Start container, promote domain controller and expose all ports locally
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
       xnandersson/samba-ad-dc /usr/local/bin/dcpromo.py
 
-Build
------
+Administer
+----------
 
 .. code:: bash
-  
-  $ sudo docker build -t xnandersson/samba-ad-dc .
 
-Prerequisites
--------------
+  $ sudo docker exec dc /bin/bash
+  # samba-tool user create nandersson Secret012
+  # samba-tool user setpassword Administrator
+  # samba-tool user setpassword nandersson
+  # samba-tool user list
+  # samba-tool group add Staff
+  # samba-tool group add Superusers
+  # samba-tool group addmembers Staff nandersson
+  # samba-tool group addmembers Superusers nandersson
+
+Package Dependencies
+--------------------
 
 .. code:: bash
 
@@ -46,8 +64,8 @@ Prerequisites
   $ su - ${USER}
   
 
-Test
-----
+Pytest
+------
 
 .. code:: bash
 
@@ -59,8 +77,8 @@ Test
   $ pytest
   
 
-Python HOWTO
-------------
+Python Example 
+--------------
 
 .. code:: python3
 
@@ -83,8 +101,8 @@ Python HOWTO
     print(entry)
     
 
-Testing
--------
+LDAP Search Example
+-------------------
 
 .. code:: bash
  
@@ -94,25 +112,8 @@ Testing
   $ ldapsearch  -H ldaps://localhost:3269 -b 'dc=openforce,dc=org' -x -w 'Abc123!'  -D "OPENFORCE\Administrator" -s sub  '(sAMAccountName=nandersson)'
   $ ldapsearch  -H ldap://localhost:389 -b 'cn=users,dc=openforce,dc=org' -x -D "Administrator@OPENFORCE.ORG" -s sub -Z "(cn=*)" cn mail sn -w 'Abc123!'
 
-
-Samba-tool
-----------
-
-.. code:: bash
-
-  $ sudo docker exec dc /bin/bash
-  # samba-tool user list
-  # samba-tool user create nandersson Secret012
-  # samba-tool user setpassword Administrator
-  # samba-tool user setpassword nandersson
-  # samba-tool group add Staff
-  # samba-tool group add Superusers
-  # samba-tool group addmembers Staff nandersson
-  # samba-tool group addmembers Superusers nandersson
-  # samba-tool dns query 192.168.1.10 1.168.192.in-addr.arpa 1.168.192.in-addr.arpa ALL -U Administrator --password='Abc123!'
-
-DNS  
----
+DNS Example  
+-----------
 
 .. code:: bash
 
@@ -128,3 +129,4 @@ DNS
   $ samba-tool dns add 192.168.1.10 1.168.192.in-addr.arpa 15 PTR docker.openforce.org -U Administrator --password='Yb92!!Ha99'
   $ samba-tool dns add 192.168.1.10 openforce.org docker A 192.168.1.15 -U Administrator --password='Yb92!!Ha99'
   $ samba-tool dns add 192.168.1.10 openforce.org k8s CNAME kubernetes.openforce.org -U Administrator --password='Yb92!!Ha99'
+  $ samba-tool dns query 192.168.1.10 1.168.192.in-addr.arpa 1.168.192.in-addr.arpa ALL -U Administrator --password='Abc123!'
