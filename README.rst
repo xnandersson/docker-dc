@@ -14,7 +14,7 @@ Build
 
 .. code:: bash
   
-  $ sudo docker build -t xnandersson/samba-ad-dc .
+  $ sudo docker build -t xnandersson/dc .
 
 
 Run
@@ -36,7 +36,7 @@ Run
       -p 135:135 -p 139:139 -p 389:389 \
       -p 445:445 -p 464:464 -p 636:636 \
       -p 1024:1024 -p 3268:3268 -p 3269:3269 \
-      xnandersson/samba-ad-dc /usr/local/bin/dcpromo.py
+      xnandersson/dc /usr/local/bin/dcpromo.py
 
 
 Administer
